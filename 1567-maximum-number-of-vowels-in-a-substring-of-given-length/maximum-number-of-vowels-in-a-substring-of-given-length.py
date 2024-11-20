@@ -3,7 +3,6 @@ class Solution:
         vowels = ['a', 'e', 'i', 'o', 'u']
         left, right = 0, 0
         cur_vowels = res = 0
-
         for right in range(len(s)):
             if s[right] in vowels:
                 cur_vowels += 1
@@ -11,6 +10,8 @@ class Solution:
                 if s[left] in vowels:
                     cur_vowels -= 1
                 left += 1
+                
             res = max(res, cur_vowels)
         return res
 
+       
