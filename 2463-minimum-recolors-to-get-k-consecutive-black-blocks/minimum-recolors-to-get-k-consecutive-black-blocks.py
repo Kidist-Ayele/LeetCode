@@ -1,18 +1,13 @@
 class Solution:
     def minimumRecolors(self, blocks: str, k: int) -> int:
+        cur_count = blocks[:k].count('W')
         left = 0
-        cnt_w = blocks[:k].count('W')
-        res = cnt_w
-
+        res = cur_count
         for right in range(k, len(blocks)):
             if blocks[right] == 'W':
-                cnt_w += 1
+                cur_count += 1
             if blocks[left] == 'W':
-                cnt_w -= 1
+                cur_count -= 1
             left += 1
-            res = min(res, cnt_w)
+            res = min(res, cur_count)
         return res
-
-            
-
-        
