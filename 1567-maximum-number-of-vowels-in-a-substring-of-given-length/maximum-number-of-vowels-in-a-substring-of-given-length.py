@@ -3,11 +3,15 @@ class Solution:
         vowels = ['a', 'e', 'i', 'o', 'u']
         cur_max = 0
         left = right = 0 
-        max_val = 0
+        for right in range(k):
+            if s[right] in vowels:
+                cur_max += 1
+        max_val = cur_max
+        right = k
         while right < len(s):
             if s[right] in vowels:
                 max_val += 1
-            while right - left + 1 > k:
+            if right - left + 1 > k:
                 if s[left] in vowels:
                     max_val -= 1
                 left += 1
