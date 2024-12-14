@@ -1,21 +1,19 @@
 class Solution:
     def carPooling(self, trips: List[List[int]], capacity: int) -> bool:
-        cur_max = 0
-        rows= len(trips)
-
-        for row in range(rows):
-            cur_max = max(cur_max, max(trips[row][1:]))
-        cur_passengers = [0] * (cur_max + 1)
-        # print(cur_max)
-        for row in range(rows):
-            val, start, end = trips[row][0], trips[row][1], trips[row][2]
-            cur_passengers[start] += val
-            if end < len(cur_passengers):
-                cur_passengers[end] -= val
-        prefix_sum = 0
-        for num in cur_passengers:
-            prefix_sum += num
-            if prefix_sum > capacity:
+        max_len = 0
+        for row in trips:
+            val, left, right = row
+            max_len = max(max_len, left, right)
+        direction = [0] * (max_len + 1)
+        for row in trips:
+            val, left, right = row
+            direction[left] += val
+            if right < len(direction):
+                direction[right] -= val
+        running_sum = 0
+        for i in range(len(direction)):
+            running_sum += direction[i]
+            if running_sum > capacity:
                 return False
         return True
 
